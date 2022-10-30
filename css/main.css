@@ -1,0 +1,146 @@
+*{
+    margin: 0;
+    padding: 0; 
+    font-family:'Roboto', sans-serif;
+}
+
+
+#navbar-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    align-items: center;
+}
+
+#navbar{
+    margin-right: 20px;
+}
+
+#navbar-logo{
+    margin-left: 20px;
+}
+
+#navbar-item{
+    text-decoration: none;
+    margin: 10px 10px;
+}
+
+#navbar-item:hover{
+    color: red;
+}
+
+#navbar-item:active{
+    color: green;
+}
+
+.mainbody{
+    display: flex;
+    max-width: 500px;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    padding: auto;
+    margin-top: 10rem;
+}
+
+.about-title, hr, .menu-title{
+    align-self: center;
+}
+
+.about-title, .menu-title{
+    margin: 1.3rem;
+}
+
+.about-text{
+ text-align: center;
+ margin: 1rem;
+ line-height: 1.5rem;
+ word-wrap: break-word;
+}
+
+hr{
+    width: 50%;
+    margin: 1rem;
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer-left, .footer-right{
+    margin: 1.5rem;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 300px;
+    margin-top: 10rem;
+}
+
+.menu-item{
+    color: white;
+    background-color: rgb(86, 136, 193);
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+
+.btn-login{
+    color: white;
+    background-color: rgb(86, 136, 193);
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.menu-item:hover, .menu-item:active{
+    background: rgb(105, 154, 210);
+}
+
+.container-login{
+    display: flex;
+    max-width: 400px;
+    flex-direction: column;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-item{
+    padding: 0.75rem;
+    border: solid 2px rgb(105, 154, 210);
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.label-item{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login-title{
+    margin-top: 100px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.container-login{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin: auto;
+}
+
+.btn-begin{
+    color: red;
+}
