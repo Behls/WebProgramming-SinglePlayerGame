@@ -8,18 +8,20 @@
     <title>SPACE INVADERS </title>
 </head>
 <body>
-<?php include('./views/partials/Header.php')?>
-    <div id="container-splash">
+<?php include('./partials/Header.php')?>
+    <div class="page-container">
+        
+            <div id="container-splash">
+                <h1 class="space-invaders">Space Invaders</h1>
+            </div>
+            
+            <!-- button
+            <Button class="btn-begin">LOGIN</Button> -->
+
+            <!-- link -->
+            <a href="./views/LoginPage.view.php" class="btn-begin">Login</a>
 
     </div>
-    
-    <!-- button -->
-    <Button class="btn-begin">LOGIN</Button>
-
-    <!-- link -->
-    <a href="" class="btn-begin">Login</a>
-
-    <?php include('./views/partials/Footer.php')?>
-    
+    <?php include('./partials/Footer.php')?>
 </body>
 </html>

@@ -14,10 +14,7 @@
         );
     }
 
-    header("location: ../index.php")
+    header("location: ../index.php");
 
-    // Finally, destroy the session.
     session_destroy();
-
-
 ?>

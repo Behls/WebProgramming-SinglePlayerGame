@@ -4,6 +4,10 @@
     font-family:'Roboto', sans-serif;
 }
 
+body{
+    min-height: 100vh;
+}
+
 
 #navbar-container{
     display: flex;
@@ -142,5 +146,20 @@ form{
 }
 
 .btn-begin{
+    color: red;
+}
+
+
+.page-container{
+    display: flex;
+    max-width: 500px;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    padding: auto;
+    margin-top: 10rem;
+}
+
+.username-title{
     color: red;
 }

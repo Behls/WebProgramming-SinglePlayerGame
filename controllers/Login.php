@@ -2,4 +2,4 @@
 
 $heading = 'Sign In';
 
-require "/views/LoginPage.view.php";
+require "./views/LoginPage.view.php";
