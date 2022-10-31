@@ -7,5 +7,5 @@
     
     <button type="submit" class="form-login">Login</button>
     
-    <p>Forgotten Password or Username? <b>Reset here.</b></p>
+    <p class="subtext;">Forgotten Password or Username? <b>Reset here.</b></p>
 </form>

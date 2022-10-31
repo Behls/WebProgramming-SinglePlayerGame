@@ -5,7 +5,7 @@
 }
 
 body{
-    min-height: 100vh;
+    max-height: 100vh;
 }
 
 
@@ -106,6 +106,18 @@ hr{
     padding-bottom: 15px;
 }
 
+.form-login{
+    color: white;
+    background-color: rgb(102, 194, 133);
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .menu-item:hover, .menu-item:active{
     background: rgb(105, 154, 210);
 }
@@ -162,4 +174,49 @@ form{
 
 .username-title{
     color: red;
+}
+
+.fake-container{
+    display: flex;
+    max-width: 600px;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    padding: auto;
+    margin-top: 10rem;
+}
+
+form{
+    width: 500px;
+    height: 250px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    padding: 1.4rem;
+    margin: 10px;
+}
+
+.subtext{
+    text-align: center;
+    color: rgb(45, 69, 134);
+    margin-top: 10px;
+}
+
+label{
+    color: rgb(45, 69, 134);
+    margin-bottom: 8px;
+    margin-top: 10px;
+}
+
+input{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    border: 1px solid rgb(45, 69, 134);
+    margin-bottom: 10px;
+    color: rgb(25, 67, 114);
+    border-radius: 4px;
+}
+
+.gameCanvas{
+    background-color: rgb(7, 32, 80);
 }

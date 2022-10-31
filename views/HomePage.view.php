@@ -22,6 +22,6 @@
             <a href="./views/LoginPage.view.php" class="btn-begin">Login</a>
 
     </div>
-    <?php include('./partials/Footer.php')?>
+<?php include('./partials/Footer.php')?>
 </body>
 </html>
