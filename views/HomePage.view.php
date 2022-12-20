@@ -6,22 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
     <title>SPACE INVADERS </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet"> 
+    <script src="../Box"></script>
 </head>
 <body>
-<?php include('./partials/Header.php')?>
-    <div class="page-container">
-        
-            <div id="container-splash">
-                <h1 class="space-invaders">Space Invaders</h1>
-            </div>
+
+    <div class="main-splash">
+    <?php include('./views/partials/Header.php')?>
+        <div id="container-splash">
+            <h1 class="space">Space</h1>
+            <h1 class="invaders">Invaders</h1>
             
             <!-- button
             <Button class="btn-begin">LOGIN</Button> -->
 
             <!-- link -->
-            <a href="./views/LoginPage.view.php" class="btn-begin">Login</a>
-
+            <a href="/login" class="btn-begin" id="btn-begin">Login</a>
+        </div>
+            
+            
+            <?php include('./views/partials/Footer.php')?>
     </div>
-<?php include('./partials/Footer.php')?>
+
 </body>
+<script src="../js/animation.js"></script>
+<script src="../js/utils.js"></script>
 </html>

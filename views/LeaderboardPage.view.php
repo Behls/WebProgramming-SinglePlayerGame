@@ -1,17 +1,18 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/main.css">
-    <title>Game</title>
+    <title>Main Menu</title>
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-    <canvas class="gameCanvas"  id="gamecanvas" height="500" width="400">
-
-    </canvas>
-    <script src="game.js"></script>
-    
+<?php include('./views/partials/Header.php')?>
+    <div class="menu">
+    </div>
+    <?php include('./views/partials/Footer.php')?>
 </body>
 </html>

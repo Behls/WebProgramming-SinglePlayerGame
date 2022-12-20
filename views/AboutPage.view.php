@@ -8,7 +8,7 @@
     <title>About</title>
 </head>
 <body>
-    <?php include('./partials/Header.php')?>
+<?php include('./views/partials/Header.php')?>
     <div class="mainbody">
         <h2 class="about-title">About us</h2>
         <hr>
@@ -22,6 +22,6 @@
             Nunc sit amet volutpat lectus.
         </p>
     </div>
-    <?php include('./partials/Footer.php')?>
+    <?php include('./views/partials/Footer.php')?>
 </body>
 </html>

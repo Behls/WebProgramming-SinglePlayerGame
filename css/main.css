@@ -5,7 +5,7 @@
 }
 
 body{
-    max-height: 100vh;
+    height: 100vh;
 }
 
 
@@ -22,19 +22,22 @@ body{
 
 #navbar-logo{
     margin-left: 20px;
+    color: rgb(40, 50, 99);
 }
 
 #navbar-item{
     text-decoration: none;
     margin: 10px 10px;
+    color: rgb(40, 50, 99);
+    font-weight: bold;
 }
 
 #navbar-item:hover{
-    color: red;
+    color: #fa991a;
 }
 
-#navbar-item:active{
-    color: green;
+#logo-click{
+    text-decoration: none;
 }
 
 .mainbody{
@@ -45,6 +48,29 @@ body{
     margin: auto;
     padding: auto;
     margin-top: 10rem;
+}
+
+.main-splash, .main-game{
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    margin: auto;
+    height:100%;
+}
+
+.main-splash, .main-game{
+    background-image: url('../assets/spacebg.svg');
+    background-repeat: no-repeat;
+    overflow: -moz-hidden-unscrollable;
+}
+
+
+#container-splash, #container-game{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
 }
 
 .about-title, hr, .menu-title{
@@ -67,14 +93,27 @@ hr{
     margin: 1rem;
 }
 
-.footer{
+#footer-container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+.space, .invaders{
+    text-align: center;
+    color: white;
+    font-family: 'Bungee Shade', cursive;
+    font-size: 100px;
+    line-height: 100px;
+}
+
+.invaders{
+    margin-bottom: 50px;
+}
+
 .footer-left, .footer-right{
     margin: 1.5rem;
+    color: rgb(40, 50, 99);
 }
 
 .menu{
@@ -104,6 +143,22 @@ hr{
     border-radius: 2px;
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.btn-begin{
+    color: white;
+    font-weight: bold;
+    background-color: rgb(250, 108, 26);;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    display: none;
+    align-self: center;
+    width: 200px;
 }
 
 .form-login{
@@ -156,11 +211,6 @@ form{
     margin-right: 10px;
     margin: auto;
 }
-
-.btn-begin{
-    color: red;
-}
-
 
 .page-container{
     display: flex;
@@ -217,6 +267,16 @@ input{
     border-radius: 4px;
 }
 
-.gameCanvas{
+.game-canvas{
     background-color: rgb(7, 32, 80);
+    height:650px;
+    width: 1000px;
+    align-self: center;
+}
+
+.score{
+    align-self: center;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 10px;
 }

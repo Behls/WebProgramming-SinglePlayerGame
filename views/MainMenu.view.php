@@ -5,7 +5,6 @@
         //  echo '<p> '.$username.'</p>';
 
         //  session_start();
-
 ?>
 
 
@@ -19,7 +18,7 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-<?php include('./partials/Header.php')?>
+<?php include('./views/partials/Header.php')?>
     <div class="menu">
         <h2 class="menu-title">Main Menu</h2>
         <?php echo '<h3 class="username-title"> Welcome Back: ' .$username. '</h3>'?>      
@@ -27,6 +26,6 @@
         <button class="menu-item">Scoreboard</button>
         <button class="menu-item">Logout</button>
     </div>
-    <?php include('./partials/Footer.php')?>
+    <?php include('./views/partials/Footer.php')?>
 </body>
 </html>
