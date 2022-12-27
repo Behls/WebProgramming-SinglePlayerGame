@@ -17,8 +17,17 @@ window.addEventListener("keydown", (e)=>{
 
 })
 
+// bullet
+- not visible - wall set - couple pixels outside canvas, destroyed when they pass beyond, key
+- each cycle - check position bullet 
+- if y less than 0 they are off the screen and can be removed
 
-// world setup
+// game logic
+
+/***
+ * BOX 2D Web Definintions
+ */
+
 var b2Vec2 = Box2D.Common.Math.b2Vec2;
 var b2BodyDef = Box2D.Dynamics.b2BodyDef;
 var b2Body = Box2D.Dynamics.b2Body;
@@ -30,20 +39,41 @@ var b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
 var b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
+/*****
+* Objects for Destruction
+*/
+
 var destroylist = []; // Empty List at start
+
 
 /*****
 * Define Canvas and World
 */
- var WIDTH=500;
- var HEIGHT=500;
- var SCALE=30;
- var world = new b2World(
- new b2Vec2(0,9.81),
-     true
- );
 
-var player = defineNewDynamic(1.0,0.5,0.1,30,320,50,50,"player");
+var WIDTH=1000;
+var HEIGHT=650;
+var SCALE=30;
+var world = new b2World(
+new b2Vec2(0,9.81),
+    true
+);
+
+// building walls to stop players from falling of the edge
+
+// change colour of these
+var ground = defineNewStatic(1.0,0.5,0.2,(WIDTH/2),HEIGHT,(WIDTH/2),1,"floor",0);
+var leftWall = defineNewStatic(1.0,0.5,0.2,1, HEIGHT, 1, HEIGHT,"side-wall",0);
+var rightWall = defineNewStatic(1.0,0.5,0.2,WIDTH-1,HEIGHT,1,HEIGHT,"side-wall",0);
+
+var player = defineNewDynamicCircle(0,0.5,0.1,30,570,10,"hero");
+player.GetBody().SetFixedRotation(true);
+
+// player.GetBody().ApplyForce(hero.GetBody().GetMass() * world.GetGravity(), hero.GetBody().GetWorldCenter());
+// player.GetBody().SetGravity(0);
+// player.GetBody().gravityScale = 0.0;
+
+// easel js - box invisible
+// rotation fixed
 
 /*
 Debug Draw
@@ -59,9 +89,7 @@ debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 world.SetDebugDraw(debugDraw);
 
 
-//  game loop
 // Update World Loop
-
 function update() {
     world.Step(
         1/60, // framerate
@@ -77,12 +105,94 @@ function update() {
     destroylist.length = 0;
 
     window.requestAnimationFrame(update);
-
 }
 
 window.requestAnimationFrame(update);
 
-// build shapes
+/*****
+* Listeners
+*/
+
+var listener = new Box2D.Dynamics.b2ContactListener;
+const container = document.getElementById('text-container');
+let canJump;
+
+listener.BeginContact = function(contact) {
+   //  console.log("Begin Contact:"+contact.GetFixtureA().GetBody().GetUserData());
+    var fixa=contact.GetFixtureA().GetBody().GetUserData();
+    var fixb=contact.GetFixtureB().GetBody().GetUserData();
+}
+
+listener.EndContact = function(contact) {
+   //  console.log("End Contact:"+contact.GetFixtureA().GetBody().GetUserData());
+   var fixa=contact.GetFixtureA().GetBody().GetUserData();
+   var fixb=contact.GetFixtureB().GetBody().GetUserData();
+}
+
+listener.PostSolve = function(contact, impulse) {
+        var fixa=contact.GetFixtureA().GetBody().GetUserData().id;
+        var fixb=contact.GetFixtureB().GetBody().GetUserData().id;
+       //  console.log(fixa+" hits "+fixb+" withimp:"+impulse.normalImpulses[0]);
+}
+
+listener.PreSolve = function(contact, oldManifold) {
+}
+
+this.world.SetContactListener(listener);
+
+
+// movement keys
+
+$(document).keydown(function(e){
+   if(e.keyCode == 65 || e.keyCode == 37){
+        goLeft();
+    }if(e.keyCode == 68 || e.keyCode == 39){
+        goRight();
+    }
+ })
+ 
+ $(document).keyup(function(e){
+    if(e.keyCode == 65 || e.keyCode == 37){
+        console.log("left up");
+    }if(e.keyCode == 68 || e.keyCode == 39){
+        console.log("right up");
+    }
+ })
+
+
+// player moves
+function goRight()  {
+    hero.GetBody().ApplyImpulse(new b2Vec2(5,0), hero.GetBody().GetWorldCenter());
+    if(hero.GetBody().GetLinearVelocity().x > 10){
+        hero.GetBody().SetLinearVelocity(new b2Vec2(10,hero.GetBody().GetLinearVelocity().y));
+    }
+ }
+ 
+ function goLeft() {
+    hero.GetBody().ApplyImpulse(new b2Vec2(-5,0), hero.GetBody().GetWorldCenter());
+    if(hero.GetBody().GetLinearVelocity().x < -10){
+        hero.GetBody().SetLinearVelocity(new b2Vec2(-10,hero.GetBody().GetLinearVelocity().y));
+    }
+ }
+
+
+function defineNewStatic(density, friction, restitution, x, y, width, height, objid, angle) {
+    var fixDef = new b2FixtureDef;
+    fixDef.density = density;
+    fixDef.friction = friction;
+    fixDef.restitution = restitution;
+    var bodyDef = new b2BodyDef;
+    bodyDef.type = b2Body.b2_staticBody;
+    bodyDef.position.x = x / SCALE;
+    bodyDef.position.y = y / SCALE;
+    bodyDef.angle = angle;
+    fixDef.shape = new b2PolygonShape;
+    fixDef.shape.SetAsBox(width/SCALE, height/SCALE);
+    var thisobj = world.CreateBody(bodyDef).CreateFixture(fixDef);
+    thisobj.GetBody().SetUserData({id:objid})
+    return thisobj;
+}
+
 function defineNewDynamic(density, friction, restitution, x, y, width, height, objid) {
     var fixDef = new b2FixtureDef;
     fixDef.density = density;
@@ -94,6 +204,21 @@ function defineNewDynamic(density, friction, restitution, x, y, width, height, o
     bodyDef.position.y = y / SCALE;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(width/SCALE, height/SCALE);
+    var thisobj = world.CreateBody(bodyDef).CreateFixture(fixDef);
+    thisobj.GetBody().SetUserData({id:objid})
+    return thisobj;
+}
+
+function defineNewDynamicCircle(density, friction, restitution, x, y, r, objid) {
+    var fixDef = new b2FixtureDef;
+    fixDef.density = density;
+    fixDef.friction = friction;
+    fixDef.restitution = restitution;
+    var bodyDef = new b2BodyDef;
+    bodyDef.type = b2Body.b2_dynamicBody;
+    bodyDef.position.x = x / SCALE;
+    bodyDef.position.y = y / SCALE;
+    fixDef.shape = new b2CircleShape(r/SCALE);
     var thisobj = world.CreateBody(bodyDef).CreateFixture(fixDef);
     thisobj.GetBody().SetUserData({id:objid})
     return thisobj;

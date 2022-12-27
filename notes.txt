@@ -1,0 +1,34 @@
+game logic
+
+------ bullet mechs ------
+
+- if user presses  'space':
+
+[ ] shoot bullet horizontally - no angel - up the y axis
+[ ] shoot from center of player
+
+- if bullet collides with enemy
+
+[ ] destroy enemy
+[ ] score +=1
+[ ] set and get score values
+
+-- player mechs
+
+[ ] fixed y axis 
+[ ] can move left or right
+[ ] space / right click shoots
+
+
+
+----- world logic -----
+
+[ ] if enemy hits ground or player - game over 
+[ ] save username and score
+
+
+------- leaderboard --------
+
+[ ] retrieve local storage
+[ ] if(empty) - display generic status message
+[ ] else - for every item in list - display username & score
