@@ -31,4 +31,21 @@ If there is no index file, then it may be required to specific the file if its n
 php -S localhost:8000/examplepage.php
 
 ```
-## Section 3 - Running The Application Remotely
+## Section 3 - Router Explained
+
+The index file for the whole application contains a simple router. This is done by getting URI of the current page, and then redirecting to the appropriate controller based on the current uri.
+
+An example of this would be:
+
+```
+
+$uri = $_SERVER['REQUEST_URI'];
+   if ($uri === '/'){
+        require './controllers/Page.php';
+   }
+
+```
+
+This makes the URLS cleaner - overall better practice using routers for responses, redirects etc.
+
+## Section 4 - Controllers, Views & Partials

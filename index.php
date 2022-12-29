@@ -17,7 +17,6 @@
   }else if($uri ==='/menu'){
     require './controllers/MainMenu.php';
   }
-
 ?>
 
 

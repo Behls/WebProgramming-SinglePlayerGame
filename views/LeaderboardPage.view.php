@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-<?php include('./views/partials/Header.php')?>
-    <div class="menu">
-    </div>
+    <div class="main-section">
+    <?php include('./views/partials/Header.php')?>
+        <div id="container-board">
+        </div>            
     <?php include('./views/partials/Footer.php')?>
+</div>
 </body>
+<script src="../js/server.js"></script>
 </html>

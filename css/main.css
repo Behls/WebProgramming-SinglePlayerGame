@@ -50,7 +50,7 @@ body{
     margin-top: 10rem;
 }
 
-.main-splash, .main-game{
+.main-splash, .main-game, .main-section{
     display: flex;
     max-width: 100%;
     flex-direction: column;
@@ -64,6 +64,9 @@ body{
     overflow: -moz-hidden-unscrollable;
 }
 
+.main-section{
+    background-color: rgb(155, 182, 241);
+}
 
 #container-splash, #container-game{
     display: flex;
@@ -72,6 +75,8 @@ body{
     align-content: center;
     height: 100%;
 }
+
+
 
 .about-title, hr, .menu-title{
     align-self: center;
@@ -148,7 +153,7 @@ hr{
 .btn-begin{
     color: white;
     font-weight: bold;
-    background-color: rgb(250, 108, 26);;
+    background-color: rgb(250, 108, 26);
     text-decoration: none;
     cursor: pointer;
     border: none;
@@ -279,4 +284,25 @@ input{
     color: white;
     margin-top: 0;
     margin-bottom: 10px;
+}
+
+/* scorecards - leaderboards*/
+
+#container-board{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
+}
+
+.score-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(250, 108, 26);
+    color: white;
+    width: 300px;
+    padding: 1rem 1rem;
+    margin: 0.75rem 1rem;
 }
