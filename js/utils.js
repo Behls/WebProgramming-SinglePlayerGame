@@ -1,6 +1,6 @@
 // util file for reusable and utilities
 const colours = {
-    hoverOrange: "#fa991a",
+    hoverOrange: "#fa6c1a",
     textWhite: "#ffffff"
 }
 

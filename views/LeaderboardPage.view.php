@@ -12,8 +12,14 @@
 <body>
     <div class="main-section">
     <?php include('./views/partials/Header.php')?>
-        <div id="container-board">
-        </div>            
+    <div class="container-head">
+        <h3 class="header">Leaderboard Scores </h3>
+    </div>
+
+    <div id="container-board">
+        
+    </div>          
+
     <?php include('./views/partials/Footer.php')?>
 </div>
 </body>
