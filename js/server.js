@@ -21,6 +21,10 @@ const getItems = JSON.parse(window.localStorage.getItem('user'));
 
 // console.log(getItems)
 
+// checks the length of local storage if 0 then its empty
+// if item return a mapped array to a scoreboard div element
+// else return a generic info board
+
 if(localStorage.length !=0){
 
     // mapping returned values to a html elemenent
@@ -37,7 +41,7 @@ if(localStorage.length !=0){
         // console.log(user.username);
         // console.log(user.score);
     ).join('')
-    
+
 }else{
     document.getElementById('container-board').innerHTML += `
        <div class="info-board">

@@ -5,11 +5,10 @@ const colours = {
 }
 
 // for this particular page the css elements need to change colour than the rest of the app
-
 const navColour = document.getElementsByClassName("navbar-item");
 
 for(let newColor of navColour){
-    newColor.style.color = "#ffffff";
+    newColor.style.color = colours.textWhite;
 
     newColor.addEventListener('mouseover', () =>{
         newColor.style.color = colours.hoverOrange;

@@ -8,20 +8,19 @@
     <title>About</title>
 </head>
 <body>
-<?php include('./views/partials/Header.php')?>
-    <div class="mainbody">
-        <h2 class="about-title">About us</h2>
-        <hr>
-        <p class="about-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Integer ut mattis risus, vel ullamcorper metus. Phasellus eleifend orci at 
-            bibendum dictum. Aenean vitae ipsum et augue rutrum viverra elementum sit amet orci. 
-            In diam enim, egestas eu interdum et, pharetra in purus. Proin nec nibh laoreet, 
-            ullamcorper sapien sed, interdum dolor. Donec mattis eu est non tempus. Nam
-            vestibulum justo velit, at aliquam ex tincidunt ut. Phasellus ac varius tortor.
-            Nunc sit amet volutpat lectus.
-        </p>
+    <div class="main-about">
+    <?php include('./views/partials/Header.php')?>
+        <div id="container-about">
+            <h2 class="about-title">About us</h2>
+            <hr>
+            
+            <p class="about-text">
+                This protype game was built in line with the web-programming module at Perth College UHI. It's an interpretation of
+                space invaders with little physics thrown into the mix. All information in regards to code base, running the application can be found 
+                here on <a href="" class="github-link"><strong>Github</Strong></a> 
+            </p>
+        </div>
+        <?php include('./views/partials/Footer.php')?>
     </div>
-    <?php include('./views/partials/Footer.php')?>
 </body>
 </html>

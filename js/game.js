@@ -10,17 +10,19 @@ window.addEventListener("keydown", (e)=>{
  
     if(e.key == "ArrowRight" || e.key == "d"){
         console.log("going right");
+        goRight();
     }
     if(e.key == "ArrowLeft" || e.key == "a"){
         console.log("going right");
+        goLeft();
     }
 
 })
 
 // bullet
-- not visible - wall set - couple pixels outside canvas, destroyed when they pass beyond, key
-- each cycle - check position bullet 
-- if y less than 0 they are off the screen and can be removed
+// - not visible - wall set - couple pixels outside canvas, destroyed when they pass beyond, key
+// - each cycle - check position bullet 
+// - if y less than 0 they are off the screen and can be removed
 
 // game logic
 
@@ -58,14 +60,14 @@ new b2Vec2(0,9.81),
     true
 );
 
-// building walls to stop players from falling of the edge
-
 // change colour of these
-var ground = defineNewStatic(1.0,0.5,0.2,(WIDTH/2),HEIGHT,(WIDTH/2),1,"floor",0);
+var ground = defineNewStatic(1.0,0.5,0.2,(WIDTH/2),HEIGHT,(WIDTH/2),40,"floor",0);
+
+
 var leftWall = defineNewStatic(1.0,0.5,0.2,1, HEIGHT, 1, HEIGHT,"side-wall",0);
 var rightWall = defineNewStatic(1.0,0.5,0.2,WIDTH-1,HEIGHT,1,HEIGHT,"side-wall",0);
 
-var player = defineNewDynamicCircle(0,0.5,0.1,30,570,10,"hero");
+var player = defineNewDynamicCircle(0,0.5,0.1,30,570,10,"player");
 player.GetBody().SetFixedRotation(true);
 
 // player.GetBody().ApplyForce(hero.GetBody().GetMass() * world.GetGravity(), hero.GetBody().GetWorldCenter());
@@ -142,7 +144,6 @@ this.world.SetContactListener(listener);
 
 
 // movement keys
-
 $(document).keydown(function(e){
    if(e.keyCode == 65 || e.keyCode == 37){
         goLeft();
@@ -162,16 +163,16 @@ $(document).keydown(function(e){
 
 // player moves
 function goRight()  {
-    hero.GetBody().ApplyImpulse(new b2Vec2(5,0), hero.GetBody().GetWorldCenter());
-    if(hero.GetBody().GetLinearVelocity().x > 10){
-        hero.GetBody().SetLinearVelocity(new b2Vec2(10,hero.GetBody().GetLinearVelocity().y));
+    player.GetBody().ApplyImpulse(new b2Vec2(5,0), player.GetBody().GetWorldCenter());
+    if(player.GetBody().GetLinearVelocity().x > 10){
+        player.GetBody().SetLinearVelocity(new b2Vec2(10,player.GetBody().GetLinearVelocity().y));
     }
  }
  
  function goLeft() {
-    hero.GetBody().ApplyImpulse(new b2Vec2(-5,0), hero.GetBody().GetWorldCenter());
-    if(hero.GetBody().GetLinearVelocity().x < -10){
-        hero.GetBody().SetLinearVelocity(new b2Vec2(-10,hero.GetBody().GetLinearVelocity().y));
+    player.GetBody().ApplyImpulse(new b2Vec2(-5,0), player.GetBody().GetWorldCenter());
+    if(player.GetBody().GetLinearVelocity().x < -10){
+        player.GetBody().SetLinearVelocity(new b2Vec2(-10,player.GetBody().GetLinearVelocity().y));
     }
  }
 
@@ -223,3 +224,4 @@ function defineNewDynamicCircle(density, friction, restitution, x, y, r, objid) 
     thisobj.GetBody().SetUserData({id:objid})
     return thisobj;
 }
+

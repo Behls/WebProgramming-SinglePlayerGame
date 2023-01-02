@@ -55,7 +55,7 @@ body{
     margin-top: 10rem;
 }
 
-.main-splash, .main-game, .main-section{
+.main-splash, .main-game, .main-section, .main-about{
     display: flex;
     max-width: 100%;
     flex-direction: column;
@@ -81,27 +81,6 @@ body{
     height: 100%;
 }
 
-
-
-.about-title, hr, .menu-title{
-    align-self: center;
-}
-
-.about-title, .menu-title{
-    margin: 1.3rem;
-}
-
-.about-text{
- text-align: center;
- margin: 1rem;
- line-height: 1.5rem;
- word-wrap: break-word;
-}
-
-hr{
-    width: 50%;
-    margin: 1rem;
-}
 
 #footer-container{
     display: flex;
@@ -293,14 +272,6 @@ input{
 
 /* scorecards - leaderboards*/
 
-#container-board{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    height: 100%;
-
-}
 
 .container-head{
     display: flex;
@@ -362,4 +333,48 @@ input{
     margin-bottom: 1rem;
     font-weight: bold;
     color: white;
+}
+
+/* about page  */
+
+#container-about{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.about-text{
+    width: 500px;
+    margin: 1rem 1rem;
+}
+
+.about-title, hr, .menu-title{
+    align-self: center;
+}
+
+.about-title, .menu-title{
+    margin: 1.3rem;
+    color:#fa6c1a;
+}
+
+.about-text{
+ text-align: center;
+ margin: 1rem;
+ line-height: 1.5rem;
+ word-wrap: break-word;
+ color:rgb(25, 67, 114);
+}
+
+hr{
+    width: 400px;
+    margin: 1rem;
+    color:rgb(7, 32, 80);
+}
+
+.github-link{
+    color:rgb(250, 108, 26);
+    /* font-weight: bold; */
+    text-decoration: none;
 }
