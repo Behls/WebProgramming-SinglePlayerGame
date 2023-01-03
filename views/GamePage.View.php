@@ -15,16 +15,15 @@
 <div class="main-game">
     <?php include('./views/partials/Header.php')?>
         <div id="container-game">
-            <h1 class="score" id="score">Score: 300</h1>
+            <h1 class="score" id="score">Score: </h1>
             <canvas id="game-canvas" height="650" width="1000" class="game-canvas">
 
             </canvas>
         </div>            
     <?php include('./views/partials/Footer.php')?>
 </div>
-
 </body>
-<script src="../js/game.js"></script>
-<script src="../js/utils.js"></script>
-<!-- <script src="../js/test.js"></script> -->
+    <script src="../js/game.js"></script>
+    <script src="../js/utils.js"></script>
+    <!-- <script src="../js/test.js"></script> -->
 </html>

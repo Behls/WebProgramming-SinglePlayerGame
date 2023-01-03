@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0; 
     font-family:'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 body{
@@ -55,7 +56,7 @@ body{
     margin-top: 10rem;
 }
 
-.main-splash, .main-game, .main-section, .main-about{
+.main-splash, .main-game, .main-section, .main-about, .main-login{
     display: flex;
     max-width: 100%;
     flex-direction: column;
@@ -73,20 +74,21 @@ body{
     background-color: rgb(155, 182, 241);
 }
 
-#container-splash, #container-game{
+#container-splash, #container-game, #container-board #container-login{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     height: 100%;
 }
-
 
 #footer-container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
+/* home page */
 
 .space, .invaders{
     text-align: center;
@@ -99,6 +101,24 @@ body{
 .invaders{
     margin-bottom: 50px;
 }
+
+span{
+    opacity: 0;
+    transition: all 2s ease;
+    display: inline-block;
+    transform: translateY(-50px);
+}
+
+span.faded{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+
+/* .text-space, .text-invaders{
+    text-align: center;
+    color: white
+} */
 
 .footer-left, .footer-right{
     margin: 1.5rem;
@@ -271,7 +291,6 @@ input{
 }
 
 /* scorecards - leaderboards*/
-
 
 .container-head{
     display: flex;

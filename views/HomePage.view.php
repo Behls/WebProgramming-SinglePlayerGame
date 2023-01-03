@@ -16,9 +16,15 @@
     <div class="main-splash">
     <?php include('./views/partials/Header.php')?>
         <div id="container-splash">
-            <h1 class="space">Space</h1>
-            <h1 class="invaders">Invaders</h1>
+
+            <div class="text-space">
+                <h1 class="space">Space</h1>
+            </div>  
             
+            <div class="text-invaders">
+                <h1 class="invaders">Invaders</h1>
+            </div>  
+
             <!-- button
             <Button class="btn-begin">LOGIN</Button> -->
 

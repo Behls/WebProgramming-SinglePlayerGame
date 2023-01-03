@@ -9,14 +9,12 @@
     <title>Login</title>
 </head>
 <body>
-<?php include('./views/partials/Header.php')?>
-    <div class="page-container">    
-        <div class="login-container">
+    <div class="main-login">    
+    <?php include('./views/partials/Header.php')?>
+        <div class="container-login">
         <?php include('./views/partials/LoginForm.php')?>                
         </div>
+    <?php include('./views/partials/Footer.php')?>
     </div>
- <?php include('./views/partials/Footer.php')?>
-   
-
 </body>
 </html>

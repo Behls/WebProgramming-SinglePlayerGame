@@ -16,6 +16,10 @@ window.addEventListener("keydown", (e)=>{
         console.log("going right");
         goLeft();
     }
+    if(e.key == " "){
+        console.log("space");
+        shootBullet();
+    }
 
 })
 
@@ -23,6 +27,12 @@ window.addEventListener("keydown", (e)=>{
 // - not visible - wall set - couple pixels outside canvas, destroyed when they pass beyond, key
 // - each cycle - check position bullet 
 // - if y less than 0 they are off the screen and can be removed
+
+
+function shootBullet(){
+    
+}
+
 
 // game logic
 

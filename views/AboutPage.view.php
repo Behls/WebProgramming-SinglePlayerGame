@@ -17,7 +17,7 @@
             <p class="about-text">
                 This protype game was built in line with the web-programming module at Perth College UHI. It's an interpretation of
                 space invaders with little physics thrown into the mix. All information in regards to code base, running the application can be found 
-                here on <a href="" class="github-link"><strong>Github</Strong></a> 
+                here on <a href="https://github.com/Behls/WebProgramming-SinglePlayerGame" target="_blank" class="github-link"><strong>Github</Strong></a> 
             </p>
         </div>
         <?php include('./views/partials/Footer.php')?>
