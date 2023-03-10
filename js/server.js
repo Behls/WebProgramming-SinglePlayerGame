@@ -1,4 +1,4 @@
-console.log("this is a server script");
+// console.log("this is a server script");
 
 const users = [
     {

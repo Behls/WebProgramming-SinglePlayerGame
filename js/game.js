@@ -87,6 +87,9 @@ player.GetBody().SetFixedRotation(true);
 // easel js - box invisible
 // rotation fixed
 
+
+
+
 /*
 Debug Draw
 */
