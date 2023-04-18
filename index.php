@@ -13,9 +13,14 @@
      require './controllers/Leaderboard.php';
    }else if($uri ==='/game'){
     require './controllers/Game.php';
-    // this will be moved when auth added
   }else if($uri ==='/menu'){
     require './controllers/MainMenu.php';
+  }else if($uri ==='/error'){
+    // this is purely for seeing the error route
+    require './controllers/LoginError.php';
+  }else if($uri ==='/logout'){
+    // this is purely for seeing the logout route
+    require './controllers/Logout.php';
   }
 ?>
 

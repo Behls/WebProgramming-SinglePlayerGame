@@ -56,12 +56,16 @@ body{
     margin-top: 10rem;
 }
 
-.main-splash, .main-game, .main-section, .main-about, .main-login{
+.main-splash, .main-game, .main-section, .main-about, .main-login, .main-error{
     display: flex;
     max-width: 100%;
     flex-direction: column;
     margin: auto;
     height:100%;
+}
+
+.main-error{
+    background-color: rgb(236, 236, 236);
 }
 
 .main-splash, .main-game{
@@ -74,12 +78,13 @@ body{
     background-color: rgb(155, 182, 241);
 }
 
-#container-splash, #container-game, #container-board #container-login{
+#container-splash, #container-game, #container-board, #container-login{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
+    box-sizing: border-box;
 }
 
 #footer-container{
@@ -128,9 +133,13 @@ span.faded{
 .menu{
     display: flex;
     flex-direction: column;
-    margin: auto;
-    max-width: 300px;
-    margin-top: 10rem;
+    /* margin: auto; */
+    width: 350px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-sizing: border-box;
 }
 
 .menu-item{
@@ -142,6 +151,8 @@ span.faded{
     padding-top: 10px;
     padding-bottom: 10px;
     margin: 10px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .btn-login{
@@ -170,9 +181,9 @@ span.faded{
     width: 200px;
 }
 
-.form-login{
+.form-login, .error-button{
     color: white;
-    background-color: rgb(102, 194, 133);
+    background-color: rgb(143, 88, 197);
     cursor: pointer;
     border: none;
     border-radius: 3px;
@@ -180,6 +191,15 @@ span.faded{
     padding-bottom: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+}
+
+.error-button{
+    background-color: #2d4586;
+    text-decoration: none;
+    text-align: center;
 }
 
 .menu-item:hover, .menu-item:active{
@@ -188,9 +208,12 @@ span.faded{
 
 .container-login{
     display: flex;
-    max-width: 400px;
     flex-direction: column;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 form{
     display: flex;
@@ -210,15 +233,10 @@ form{
 }
 
 .login-title{
-    margin-top: 100px;
-    margin-bottom: 30px;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
     text-align: center;
-}
-
-.container-login{
-    margin-left: 10px;
-    margin-right: 10px;
-    margin: auto;
+    color: #2d4586;
 }
 
 .page-container{
@@ -247,17 +265,19 @@ form{
 
 form{
     width: 500px;
-    height: 250px;
+    height: auto;
     background-color: rgb(240, 240, 240);
     border-radius: 10px;
     padding: 1.4rem;
     margin: 10px;
+    box-sizing: border-box;
 }
 
 .subtext{
     text-align: center;
     color: #2d4586;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 label{
@@ -278,7 +298,7 @@ input{
 
 .game-canvas{
     background-color: rgb(7, 32, 80);
-    height:650px;
+    height:500px;
     width: 1000px;
     align-self: center;
 }
@@ -364,21 +384,26 @@ input{
     height: 100%;
 }
 
-.about-text{
+.about-text, .error-text{
     width: 500px;
     margin: 1rem 1rem;
 }
 
-.about-title, hr, .menu-title{
+.about-title, hr, .menu-title, .error-title{
     align-self: center;
 }
 
-.about-title, .menu-title{
+.about-title, .error-title{
     margin: 1.3rem;
     color:#fa6c1a;
 }
 
-.about-text{
+.menu-title{
+    margin: 1.3rem;
+   color:#efddd2; 
+}
+
+.about-text, .error-text{
  text-align: center;
  margin: 1rem;
  line-height: 1.5rem;
@@ -396,4 +421,55 @@ hr{
     color:rgb(250, 108, 26);
     /* font-weight: bold; */
     text-decoration: none;
+}
+/* modal */
+
+.modal-container{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal{
+  background-color: #fefefe;
+  margin-top: 15rem;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-text{
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    color:#2d4586;
+    text-align: center;
+}
+
+.modal-button{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background:#fa6c1a;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
 }

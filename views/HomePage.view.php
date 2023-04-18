@@ -12,7 +12,7 @@
     <script src="../Box"></script>
 </head>
 <body>
-
+    
     <div class="main-splash">
     <?php include('./views/partials/Header.php')?>
         <div id="container-splash">

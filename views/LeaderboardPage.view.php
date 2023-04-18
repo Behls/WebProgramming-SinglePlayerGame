@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,17 +9,17 @@
 </head>
 <body>
     <div class="main-section">
-    <?php include('./views/partials/Header.php')?>
-    <div class="container-head">
-        <h3 class="header">Leaderboard Scores </h3>
+        <?php include('./views/partials/Header.php')?>
+        <div class="container-head">
+            <h3 class="header">Leaderboard Scores </h3>
+        </div>
+
+        <div id="container-board">
+            
+        </div>          
+
+        <?php include('./views/partials/Footer.php')?>
     </div>
-
-    <div id="container-board">
-        
-    </div>          
-
-    <?php include('./views/partials/Footer.php')?>
-</div>
 </body>
 <script src="../js/server.js"></script>
 </html>

@@ -1,10 +1,11 @@
 <?php
-         $username=$_POST['username'];
-         $pass=$_POST['password'];
-     
-        //  echo '<p> '.$username.'</p>';
+session_start();
 
-        //  session_start();
+if(!$_SESSION['logged_in']){
+  header('Location: http://localhost/controllers/LoginError.php');
+  exit();
+}
+extract($_SESSION['userData']);
 ?>
 
 
@@ -18,14 +19,18 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-<?php include('./views/partials/Header.php')?>
-    <div class="menu">
-        <h2 class="menu-title">Main Menu</h2>
-        <?php echo '<h3 class="username-title"> Welcome Back: ' .$username. '</h3>'?>      
-        <button class="menu-item">Start Game</button>
-        <button class="menu-item">Scoreboard</button>
-        <button class="menu-item">Logout</button>
+    <div class="main-splash">
+    <?php include('./views/partials/Header.php')?>
+        <div id="container-splash">
+            <div class="menu">
+                <h2 class="menu-title">Main Menu</h2> 
+                <a href="/game" class="menu-item">Start Game</a>
+                <a href="/leaderboard" class="menu-item">Leaderboard</a>
+                <a href="/logout" class="menu-item">Logout</a>
+            </div>
+        </div>
+        <?php include('./views/partials/Footer.php')?>
     </div>
-    <?php include('./views/partials/Footer.php')?>
 </body>
+<script src="../js/utils.js"></script>
 </html>

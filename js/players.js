@@ -1,1 +1,0 @@
-// class for generator a player

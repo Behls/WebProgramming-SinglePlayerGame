@@ -12,18 +12,27 @@
 </head>
 <body>
     
+<div class="modal-container" id="modal-container">
+    <div class="modal" id="modal">
+            <p class="modal-text" id="modal-text">Game over! Return to the Main Menu</p>
+            <a href="/menu" class="modal-button" id="modal-button">Return to Menu</a>
+    </div>
+</div>
+
 <div class="main-game">
     <?php include('./views/partials/Header.php')?>
         <div id="container-game">
-            <h1 class="score" id="score">Score: </h1>
-            <canvas id="game-canvas" height="650" width="1000" class="game-canvas">
+            <h1 class="score" id="score"></h1>
+            <canvas id="game-canvas" height="500" width="1000" class="game-canvas">
 
             </canvas>
         </div>            
     <?php include('./views/partials/Footer.php')?>
 </div>
+
 </body>
     <script src="../js/game.js"></script>
     <script src="../js/utils.js"></script>
+    <script src="../js/modal.js"></script>
     <!-- <script src="../js/test.js"></script> -->
 </html>
