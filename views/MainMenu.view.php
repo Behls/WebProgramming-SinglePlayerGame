@@ -1,13 +1,11 @@
 <?php
 session_start();
-
 if(!$_SESSION['logged_in']){
-  header('Location: http://localhost/controllers/LoginError.php');
+  header('Location: /error');
   exit();
 }
 extract($_SESSION['userData']);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

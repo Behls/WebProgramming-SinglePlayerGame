@@ -1,3 +1,8 @@
+<?php
+session_start();
+$username = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +27,13 @@
 <div class="main-game">
     <?php include('./views/partials/Header.php')?>
         <div id="container-game">
+            <div id="container-score container-username" class="container-score container-username">
+                <h1 class="text-score" id="title-score">Score: </h1>
+                <h1 class="score" id="score">10</h1>
+                <h1 class="text-username" id="text-username">Username: </h1>
+                <h1 class="username" id="username"><?php echo $username; ?></h1>
+            </div>
+            
             <h1 class="score" id="score"></h1>
             <canvas id="game-canvas" height="500" width="1000" class="game-canvas">
 
@@ -34,5 +46,6 @@
     <script src="../js/game.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/modal.js"></script>
+
     <!-- <script src="../js/test.js"></script> -->
 </html>

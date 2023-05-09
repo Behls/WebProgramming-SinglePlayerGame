@@ -133,7 +133,7 @@ function goUp() {
 
 function updateScore(){
     scoreTag = document.getElementById("score");
-    scoreTag.innerHTML = "Score: "+ getScore();
+    scoreTag.innerHTML = ""+ getScore();
 }
 
 /*
@@ -198,21 +198,25 @@ listener.BeginContact = function(contact) {
     }
     if(fixb.id == "bullet" && fixa.id == "sky"){
         destroylist.push(contact.GetFixtureB().GetBody());
-        console.log(shoot);
     }
     if(fixb.id == "sky" && fixa.id == "bullet"){
         destroylist.push(contact.GetFixtureA().GetBody());
     }
     if(fixa.id == "enemy" && fixb.id == "ground"){
+        destroylist.push(contact.GetFixtureA().GetBody());
         gameOver();
+
     }
     if(fixa.id == "ground" && fixb.id == "enemy"){
+        destroylist.push(contact.GetFixtureB().GetBody());
         gameOver();
     }
     if(fixa.id == "enemy" && fixb.id == "player"){
+        destroylist.push(contact.GetFixtureA().GetBody());
         gameOver();
     }
     if(fixa.id == "player" && fixb.id == "enemy"){
+        destroylist.push(contact.GetFixtureB().GetBody());
         gameOver();
     }
 }
@@ -332,8 +336,25 @@ function decreaseScore (){
 function gameOver(){
     var showModal = document.getElementById("modal-container");
     showModal.style.display="block";
-    localStorage.setItem('score', score);
     resetScore();
     clearInterval(enemySpawn);
+    storeData();
+}
+
+function storeData(){
+    var getScore = document.getElementById("score").innerHTML;
+    var getUsername = document.getElementById("username").innerHTML;
+
+    const users = [{
+        username: getUsername,
+        score:  getScore
+    }
+    ]
+
+    console.log(users.username);
+    console.log(users.score);
+
+    var addItems = window.localStorage.setItem('users', JSON.stringify(users));
+
 }
 

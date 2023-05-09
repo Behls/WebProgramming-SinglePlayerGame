@@ -9,7 +9,7 @@
 [x] - don't allow jumping
 
 <!-- score -->
-[] - destroy an enemy gain points
+[x] - destroy an enemy gain points
 [x] - add it to the html page
 
 <!-- win / lose -->

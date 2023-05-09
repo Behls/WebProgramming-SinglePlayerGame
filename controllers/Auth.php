@@ -1,7 +1,7 @@
 <?php
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 if(!isset($_GET['code'])){
     echo 'no code';
@@ -9,7 +9,6 @@ if(!isset($_GET['code'])){
 }
 
 $code = $_GET['code'];
-
 
 $pl = [
     'code'=>$code,
@@ -71,5 +70,5 @@ $_SESSION['userData'] = [
     'avatar'=>$result['avatar'],
 ];
 
-header("location: MainMenu.php");
+header("location: /menu");
 exit();

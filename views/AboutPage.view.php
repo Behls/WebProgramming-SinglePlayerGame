@@ -1,3 +1,10 @@
+<?php
+session_start();
+$username = "samuel1234";
+$_SESSION['username'] = 'samuel111';
+$user = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +19,7 @@
     <?php include('./views/partials/Header.php')?>
         <div id="container-about">
             <h2 class="about-title">About us</h2>
+            <h1><?php echo $user; ?></h1>
             <hr>
             
             <p class="about-text">

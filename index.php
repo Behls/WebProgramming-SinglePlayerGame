@@ -1,6 +1,3 @@
-
-<!-- building a url endpoint router -->
-
 <?php
    $uri = $_SERVER['REQUEST_URI'];
    if ($uri === '/'){
@@ -21,7 +18,10 @@
   }else if($uri ==='/logout'){
     // this is purely for seeing the logout route
     require './controllers/Logout.php';
-  }
+  }else if($uri ==='/logout'){
+      require './controllers/LoginError.php';
+    }
+  
 ?>
 
 
