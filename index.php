@@ -18,10 +18,9 @@
   }else if($uri ==='/logout'){
     // this is purely for seeing the logout route
     require './controllers/Logout.php';
-  }else if($uri ==='/logout'){
-      require './controllers/LoginError.php';
-    }
-  
+  }else if($uri ==='/auth'){
+      require './controllers/Auth.php';
+  }
 ?>
 
 

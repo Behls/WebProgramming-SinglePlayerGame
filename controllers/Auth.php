@@ -1,19 +1,15 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 if(!isset($_GET['code'])){
     echo 'no code';
     exit();
 }
-
 $code = $_GET['code'];
 
 $pl = [
     'code'=>$code,
     'client_id'=>'1097336512095453214',
-    'client_secret'=>'moj3EE8RdBguccMc-NVukLAriLz1tbOe',
+    'client_secret'=>'OpL_07vRq5tyEKLYXrRzzumCkEaUBMAA',
     'grant_type'=>'authorization_code',
     'redirect_uri'=>'http://localhost/controllers/Auth.php',
     'scope'=>'identify',
@@ -41,9 +37,7 @@ if(!$result){
 }
 
 $result = json_decode($result,true);
-echo var_dump($result);
 $access_token = $result['access_token'];
-echo var_dump($var_dump);
 
 $discord_users_url = "https://discordapp.com/api/users/@me";
 $header = array("Authorization: Bearer $access_token", "Content-Type: application/x-www-form-urlencoded");
@@ -70,5 +64,6 @@ $_SESSION['userData'] = [
     'avatar'=>$result['avatar'],
 ];
 
-header("location: /menu");
+header("Location: /menu");
 exit();
+?>

@@ -1,46 +1,4 @@
 
-// getting key values -> keyCode works but is deprecated, key must be used. 
-// returns a string value rather than numberic
-// key pressing actions -> check if successful
-// window.addEventListener('keydown', (e) => {
-//     console.log(e);
-// })
-
-
-window.addEventListener("keydown", (e)=>{
-    if(e.key == "ArrowRight" || e.key == "d"){
-        console.log("going right");
-        // goRight();
-        goUp(); 
-    }
-    if(e.key == "ArrowLeft" || e.key == "a"){
-        console.log("going right");
-        goLeft();  
-    }
-})
-
-window.addEventListener("keyup", (e)=>{
-    if(e.key == "ArrowRight" || e.key == "d"){
-        console.log("going right");
-        // goRight();
-    }
-    if(e.key == "ArrowLeft" || e.key == "a"){
-        console.log("going right");
-        // goLeft();
-    }
-
-    if(e.key == "Enter" || e.key == " "){
-        shoot = shootBullet();
-    }
-})
-
-// bullet
-// - not visible - wall set - couple pixels outside canvas, destroyed when they pass beyond, key
-// - each cycle - check position bullet 
-// - if y less than 0 they are off the screen and can be removed
-
-// game logic
-
 /***
  * BOX 2D Web Definintions
  */
@@ -56,11 +14,21 @@ var b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
 var b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
+
+/*****
+* EaselJs Globals
+*/
+
+var easelCan, easelctx, loader, stage, stageheight, stagewidth;
+var ship, meteor, bullets;
+
 /*****
 * Objects for Destruction
 */
 
 var destroylist = []; // Empty List at start
+var easelenemies = [];
+var easelbullets = [];
 
 
 /*****
@@ -75,66 +43,33 @@ new b2Vec2(0,9.81),
     true
 );
 
-var score=0;
+var enemies = [];
+var bulletslist = [];
 
 
-
-// walls
+// environment variables
 var ground = defineNewStatic(1.0,0.5,0.2,(WIDTH/2),HEIGHT,(WIDTH/2),149,"ground",0);
 var sky = defineNewStatic(1.0,0.5,0.2,(WIDTH/2),-5,(WIDTH/2),5,"sky",0);
 var leftWall = defineNewStatic(1.0,0.5,0.2,-1, HEIGHT, 1, HEIGHT,"side-wall",0);
 var rightWall = defineNewStatic(1.0,0.5,0.2,WIDTH+2,HEIGHT,1,HEIGHT,"side-wall",0);
-
-
-var player = defineNewDynamicCircle(0,0.5,0,WIDTH/2,HEIGHT,15,"player");
-
-// var enemy = defineNewDynamic(0,0.5,0,generateRandom(),-5,3,7,"enemy");
-var enemy = defineNewDynamic(0,0.5,0,generateRandom(),-4,20,20,"enemy");
+var player = defineNewDynamicCircle(0,0.5,0,WIDTH/2,HEIGHT,30,"player");
+var enemy;
+var bullet;
+var bullets;
 var shoot;
+var score=0;
+var isShot = false;
 
-let enemySpawn = setInterval(()=>{
-    enemy = defineNewDynamic(0,0.5,0,generateRandom(),-4,20,20,"enemy");
-}, 5000);
-
-function generateRandom(){
-    let random = Math.floor(Math.random() * WIDTH) + 1;
-    return random;
-}
-
-
-let random=Math.floor(Math.random() * 7) + 1;;
-
+// player variables
 player.GetBody().SetFixedRotation(true);
 
-// player.GetBody().ApplyForce(hero.GetBody().GetMass() * world.GetGravity(), hero.GetBody().GetWorldCenter());
-// player.GetBody().SetGravity(0);
-// player.GetBody().gravityScale = 0.0;
+// enemy variables
+// let enemySpawn = setInterval(()=>{
+//     enemy = defineNewDynamic(0,0.5,0,generateRandom(),-4,20,20,"enemy");
+//     enemy.GetBody().ApplyImpulse(new b2Vec2(generateRandomImpulse(),generateRandomImpulse()), player.GetBody().GetWorldCenter());
+// }, 5000);
 
-// easel js - box invisible
-// rotation fixed
-
-function shootBullet(){
-    var x  = player.GetBody().GetPosition().x * SCALE;
-    var y = player.GetBody().GetPosition().y*SCALE;
-    var bullet = defineNewDynamic(0,0.5,0,x,y,3,7,"bullet");
-    bullet.GetBody().ApplyImpulse(new b2Vec2(0,1000), player.GetBody().GetWorldCenter());
-    bullet.GetBody().SetLinearVelocity(new b2Vec2(player.GetBody().GetLinearVelocity().x,1000));
-    return bullet;
-}
-
-console.log(player.GetBody().GetWorldCenter());
-
-function goUp() {
-    player.GetBody().ApplyImpulse(new b2Vec2(10,0), player.GetBody().GetWorldCenter());
-    if(player.GetBody().GetLinearVelocity().x > 10){
-        player.GetBody().SetLinearVelocity(new b2Vec2(10,player.GetBody().GetLinearVelocity().y));
-    }
- }
-
-function updateScore(){
-    scoreTag = document.getElementById("score");
-    scoreTag.innerHTML = ""+ getScore();
-}
+let enemySpawn;
 
 /*
 Debug Draw
@@ -151,6 +86,66 @@ debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 world.SetDebugDraw(debugDraw);
 
 
+function init(){
+    easelCan = document.getElementById("easelcan"); 
+    easelctx = easelCan.getContext("2d");
+    stage = new createjs.Stage(easelCan);
+    stage.snapPixelsEnabled = true;
+    stagewidth = stage.canvas.width;
+    stageheight = stage.canvas.height;
+
+    var manifest = [
+        {src:"ship.png", id:"ship"},
+        {src:"bullet.png", id:"bullet"},
+        {src:"meteor.png", id:"meteor"},
+    ];
+
+    loader = new createjs.LoadQueue(false);
+    loader.addEventListener("complete", handleComplete);
+    loader.loadManifest(manifest, true, "../assets/");
+
+    /*
+    Debug Draw
+    */
+
+    var debugDraw = new b2DebugDraw();
+    debugDraw.SetSprite(
+        document.getElementById("game-canvas").getContext("2d")
+    );
+    debugDraw.SetDrawScale(SCALE);
+    debugDraw.SetFillAlpha(0.3);
+    debugDraw.SetLineThickness(1.0);
+    debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+    world.SetDebugDraw(debugDraw);
+
+}
+
+
+function handleComplete(){
+    ship = makeBitmap(loader.getResult("ship"),50,50);
+    stage.addChild(ship);
+
+    enemySpawn = window.setInterval(()=>{
+        enemy = defineNewDynamic(0,0.5,0,generateRandom(),-4,20,20,"enemy");
+        enemy.GetBody().ApplyImpulse(new b2Vec2(generateRandomImpulse(),generateRandomImpulse()), player.GetBody().GetWorldCenter());
+        meteor = makeBitmap(loader.getResult("meteor"),30,30);
+        stage.addChild(meteor);
+        return meteor; 
+    }, 5000);
+
+
+    createjs.Ticker.framerate = 60;
+    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+    createjs.Ticker.addEventListener("tick", tick);
+
+}
+
+
+function tick(e){
+    update();
+    stage.update(e);
+}
+
 // Update World Loop
 function update() {
     world.Step(
@@ -158,20 +153,45 @@ function update() {
         10, // velocity iterations
         10 // position iterations
     );
+
+    ship.x = player.GetBody().GetPosition().x * SCALE;
+    ship.y = player.GetBody().GetPosition().y * SCALE;
+
+    if(meteor != undefined) {
+        meteor.x = enemy.GetBody().GetPosition().x * SCALE;
+        meteor.y = enemy.GetBody().GetPosition().y * SCALE;  
+    }
+
+    if(bullet != undefined) {
+        bullets.x = bullet.GetBody().GetPosition().x * SCALE;
+        bullets.y = bullet.GetBody().GetPosition().y * SCALE; 
+    }
+
+    if(enemies.length!=0) {
+        for(var i in enemies) {
+            i /= 60;
+            console.log(enemies[i]);
+        }
+    }
+
     world.DrawDebugData();
     world.ClearForces();
 
     for(var i in destroylist) {
         world.DestroyBody(destroylist[i]);
+        stage.removeChild(destroylist[i]);
     }
+
     destroylist.length = 0;
 
     updateScore();
     
-    window.requestAnimationFrame(update);
+    // window.requestAnimationFrame(update);
 }
 
-window.requestAnimationFrame(update);
+// window.requestAnimationFrame(update);
+
+init();
 
 /*****
 * Listeners
@@ -179,10 +199,8 @@ window.requestAnimationFrame(update);
 
 var listener = new Box2D.Dynamics.b2ContactListener;
 const container = document.getElementById('text-container');
-let canJump;
 
 listener.BeginContact = function(contact) {
-   //  console.log("Begin Contact:"+contact.GetFixtureA().GetBody().GetUserData());
     var fixa=contact.GetFixtureA().GetBody().GetUserData();
     var fixb=contact.GetFixtureB().GetBody().GetUserData();
 
@@ -200,29 +218,28 @@ listener.BeginContact = function(contact) {
         destroylist.push(contact.GetFixtureB().GetBody());
     }
     if(fixb.id == "sky" && fixa.id == "bullet"){
-        destroylist.push(contact.GetFixtureA().GetBody());
+        destroylist.push(contact.GetFixtureA().GetBody());    
     }
     if(fixa.id == "enemy" && fixb.id == "ground"){
         destroylist.push(contact.GetFixtureA().GetBody());
-        gameOver();
+        // gameOver();
 
     }
     if(fixa.id == "ground" && fixb.id == "enemy"){
         destroylist.push(contact.GetFixtureB().GetBody());
-        gameOver();
+        // gameOver();
     }
     if(fixa.id == "enemy" && fixb.id == "player"){
         destroylist.push(contact.GetFixtureA().GetBody());
-        gameOver();
+        // gameOver();
     }
     if(fixa.id == "player" && fixb.id == "enemy"){
         destroylist.push(contact.GetFixtureB().GetBody());
-        gameOver();
+        // gameOver();
     }
 }
 
 listener.EndContact = function(contact) {
-   //  console.log("End Contact:"+contact.GetFixtureA().GetBody().GetUserData());
    var fixa=contact.GetFixtureA().GetBody().GetUserData();
    var fixb=contact.GetFixtureB().GetBody().GetUserData();
 }
@@ -230,7 +247,6 @@ listener.EndContact = function(contact) {
 listener.PostSolve = function(contact, impulse) {
         var fixa=contact.GetFixtureA().GetBody().GetUserData().id;
         var fixb=contact.GetFixtureB().GetBody().GetUserData().id;
-       //  console.log(fixa+" hits "+fixb+" withimp:"+impulse.normalImpulses[0]);
 }
 
 listener.PreSolve = function(contact, oldManifold) {
@@ -238,21 +254,9 @@ listener.PreSolve = function(contact, oldManifold) {
 
 this.world.SetContactListener(listener);
 
-// player moves
-function goRight()  {
-    player.GetBody().ApplyImpulse(new b2Vec2(10,0), player.GetBody().GetWorldCenter());
-    if(player.GetBody().GetLinearVelocity().x > 10){
-        player.GetBody().SetLinearVelocity(new b2Vec2(15,player.GetBody().GetLinearVelocity().y));
-    }
- }
- 
- function goLeft() {
-    player.GetBody().ApplyImpulse(new b2Vec2(-5,0), player.GetBody().GetWorldCenter());
-    if(player.GetBody().GetLinearVelocity().x < -10){
-        player.GetBody().SetLinearVelocity(new b2Vec2(-10,player.GetBody().GetLinearVelocity().y));
-    }
- }
 
+
+// utility functions
 
 function defineNewStatic(density, friction, restitution, x, y, width, height, objid, angle) {
     var fixDef = new b2FixtureDef;
@@ -302,6 +306,29 @@ function defineNewDynamicCircle(density, friction, restitution, x, y, r, objid) 
     return thisobj;
 }
 
+// player key functions
+
+window.addEventListener("keydown", (e)=>{
+    if(e.key == "ArrowRight" || e.key == "d"){
+        goRight();
+    }
+    if(e.key == "ArrowLeft" || e.key == "a"){
+        goLeft();  
+    }
+})
+
+window.addEventListener("keyup", (e)=>{
+    if(e.key == "ArrowRight" || e.key == "d"){
+        goRight();
+    }
+    if(e.key == "ArrowLeft" || e.key == "a"){
+        goLeft();
+    }
+
+    if(e.key == "Enter" || e.key == " "){
+        shoot = shootBullet();
+    }
+})
 
 
 // score functions
@@ -332,29 +359,73 @@ function decreaseScore (){
     }
 }
 
-// game over logic.
-function gameOver(){
-    var showModal = document.getElementById("modal-container");
-    showModal.style.display="block";
-    resetScore();
-    clearInterval(enemySpawn);
-    storeData();
+function updateScore(){
+    scoreTag = document.getElementById("score");
+    scoreTag.innerHTML = ""+ getScore();
 }
 
+// additional game functions
+function generateRandom(){
+    let random = Math.floor(Math.random() * WIDTH) + 1;
+    return random;
+}
+
+//random number between -10 and 10 
+function generateRandomImpulse() {
+    var smallRandom = Math.floor(Math.random() * 21) - 10;
+    if (smallRandom == 0) return generateRandomImpulse();
+    return smallRandom;
+}
+
+function shootBullet(){
+    isShot = true;
+    var x  = player.GetBody().GetPosition().x * SCALE;
+    var y = player.GetBody().GetPosition().y*SCALE;
+    bullet = defineNewDynamic(0,0.5,0,x,y,3,7,"bullet");
+    bullet.GetBody().ApplyImpulse(new b2Vec2(0,1000), player.GetBody().GetWorldCenter());
+    bullet.GetBody().SetLinearVelocity(new b2Vec2(player.GetBody().GetLinearVelocity().x,1000));
+    bullets = makeBitmap(loader.getResult("bullet"), 3,7);
+    stage.addChild(bullets);
+    return bullets;
+}
+
+// player movement functions
+
+function goRight() {
+    player.GetBody().ApplyImpulse(new b2Vec2(20,0), player.GetBody().GetWorldCenter());
+    if(player.GetBody().GetLinearVelocity().x > 20){
+        player.GetBody().SetLinearVelocity(new b2Vec2(20,player.GetBody().GetLinearVelocity().y));
+    }
+ }
+ 
+ function goLeft() {
+    player.GetBody().ApplyImpulse(new b2Vec2(-20,0), player.GetBody().GetWorldCenter());
+    if(player.GetBody().GetLinearVelocity().x < -20){
+        player.GetBody().SetLinearVelocity(new b2Vec2(-20,player.GetBody().GetLinearVelocity().y));
+    }
+ }
+
+// data functions
 function storeData(){
     var getScore = document.getElementById("score").innerHTML;
     var getUsername = document.getElementById("username").innerHTML;
-
     const users = [{
         username: getUsername,
         score:  getScore
-    }
-    ]
-
-    console.log(users.username);
-    console.log(users.score);
+    }]
 
     var addItems = window.localStorage.setItem('users', JSON.stringify(users));
-
 }
 
+
+//easel functions
+function makeBitmap(ldrimg, b2x, b2y){
+    var theimage = new createjs.Bitmap(ldrimg);
+    var scalex = (b2x*2)/theimage.image.naturalWidth;
+    var scaley = (b2y*2)/theimage.image.naturalHeight;
+    theimage.scaleX = scalex;
+    theimage.scaleY = scaley;
+    theimage.regX = theimage.image.width/2;
+    theimage.regY = theimage.image.height/2;
+    return theimage;
+}

@@ -29,7 +29,7 @@
 const getItems = JSON.parse(window.localStorage.getItem('users'));
 
 
-if(localStorage.length !=0){
+if(localStorage.length !=0 ||  localStorage != undefined || localStorage != null){
     // mapping returned values to a html elemenent
     // do this for each user 
     document.getElementById('container-board').innerHTML = getItems.map(user=>

@@ -303,6 +303,11 @@ input{
     align-self: center;
 }
 
+/* .game-canvas{
+    display: none;
+} */
+
+
 .score{
     align-self: center;
     color: white;
@@ -354,7 +359,6 @@ input{
     margin-top: 0;
     margin-bottom: 10px;
 }
-
 
 .info-board{
     display: flex;

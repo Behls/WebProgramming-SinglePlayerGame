@@ -12,7 +12,11 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="../css/main.css">
     <script src="../Box2dWeb-2.1.a.3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
+    <script src="../easel.min.js" crossorigin="anonymous" defer></script>
+    <script src="../preload.min.js" crossorigin="anonymous" defer></script>
+    <script src="../js/game.js" defer></script>
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/modal.js" defer></script>
     <title>Space Invaders</title>
 </head>
 <body>
@@ -29,23 +33,17 @@ $username = $_SESSION['username'];
         <div id="container-game">
             <div id="container-score container-username" class="container-score container-username">
                 <h1 class="text-score" id="title-score">Score: </h1>
-                <h1 class="score" id="score">10</h1>
+                <h1 class="score" id="score"></h1>
                 <h1 class="text-username" id="text-username">Username: </h1>
                 <h1 class="username" id="username"><?php echo $username; ?></h1>
             </div>
             
             <h1 class="score" id="score"></h1>
-            <canvas id="game-canvas" height="500" width="1000" class="game-canvas">
-
-            </canvas>
+            <canvas id="easelcan" height="500" width="1000" class="easelcan"></canvas>
+            <canvas id="game-canvas" height="500" width="1000" class="game-canvas"></canvas>
         </div>            
     <?php include('./views/partials/Footer.php')?>
 </div>
 
 </body>
-    <script src="../js/game.js"></script>
-    <script src="../js/utils.js"></script>
-    <script src="../js/modal.js"></script>
-
-    <!-- <script src="../js/test.js"></script> -->
 </html>
